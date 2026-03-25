@@ -55,8 +55,8 @@ cp .env.example .env
 
 ```bash
 GEMINI_API_KEY=your_api_key_here
-GEMINI_BASE_URL=https://code.wenwen-ai.com
-GEMINI_MODEL=custom/gemini-2.5-flash-preview-09-2025
+GEMINI_BASE_URL=https://your-gemini-proxy.example.com/v1
+GEMINI_MODEL=gemini-2.5-flash
 GEMINI_PRO_MODEL=gemini-2.5-pro
 GEMINI_TIMEOUT_MS=45000
 GEMINI_PROTOCOL=auto
@@ -75,7 +75,7 @@ GEMINI_PROTOCOL=auto
 
 - `auto`：自动判断
 - 当 `GEMINI_BASE_URL` 是 `https://generativelanguage.googleapis.com/v1beta` 这类官方地址时，走原生 Gemini `generateContent`
-- 当 `GEMINI_BASE_URL` 是 `https://code.wenwen-ai.com` 这类代理根地址时，默认走 OpenAI 兼容 `chat/completions`
+- 当 `GEMINI_BASE_URL` 是 `https://your-gemini-proxy.example.com/v1` 这类代理根地址时，默认走 OpenAI 兼容 `chat/completions`
 
 ## 启动
 
@@ -145,15 +145,15 @@ npm run self-test:live
 ```bash
 cd carhome
 GEMINI_API_KEY=... \
-GEMINI_BASE_URL=https://code.wenwen-ai.com \
+GEMINI_BASE_URL=https://your-gemini-proxy.example.com/v1 \
 npm run self-test:live
 ```
 
 如果本机环境里有无效代理变量，例如：
 
 ```bash
-http_proxy=http://127.0.0.1:7897
-https_proxy=http://127.0.0.1:7897
+http_proxy=http://localhost:7897
+https_proxy=http://localhost:7897
 ```
 
 请先清掉再跑：
@@ -162,7 +162,7 @@ https_proxy=http://127.0.0.1:7897
 cd carhome
 HTTPS_PROXY= HTTP_PROXY= ALL_PROXY= https_proxy= http_proxy= all_proxy= \
 GEMINI_API_KEY=... \
-GEMINI_BASE_URL=https://code.wenwen-ai.com \
+GEMINI_BASE_URL=https://your-gemini-proxy.example.com/v1 \
 npm run self-test:live
 ```
 

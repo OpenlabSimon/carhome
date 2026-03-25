@@ -63,7 +63,7 @@ Do not commit `.env.local`.
 
 These were produced during local evaluation and remain outside the repo:
 
-- Desktop reports under `/Users/huiliu/Desktop/`
+- local desktop export reports
 - local batch temp files under `tmp/`
 - any real customer or inventory image folders
 

@@ -1,9 +1,20 @@
 {
   "name": "carhome",
   "version": "0.2.0",
-  "private": true,
   "type": "module",
   "description": "carhome 汽车图片图审识别（启发式 baseline + Gemini VLM 可插拔分析）",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OpenlabSimon/carhome.git"
+  },
+  "bugs": {
+    "url": "https://github.com/OpenlabSimon/carhome/issues"
+  },
+  "homepage": "https://github.com/OpenlabSimon/carhome#readme",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "batch-eval": "node scripts/batch-eval.js",
     "review-checklist": "node scripts/generate-review-checklist.js",
