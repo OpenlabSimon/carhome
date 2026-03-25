@@ -17,6 +17,8 @@
 
 交接说明见 [docs/HANDOFF.md](docs/HANDOFF.md)。
 模型配置对比见 [docs/MODEL_CONFIG.md](docs/MODEL_CONFIG.md)。
+贡献说明见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+版本变更见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 技术结构
 
