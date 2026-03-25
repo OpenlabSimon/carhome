@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>carhome</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero panel">
+        <div>
+          <p class="eyebrow">carhome</p>
+          <h1>carhome</h1>
+          <p class="hero-copy">
+            上传单张汽车图片，返回结构化 JSON 结果。当前支持 `heuristic | gemini | hybrid`
+            三种模式，默认 `heuristic`，只覆盖 5 类问题：过曝、偏暗、虚图/模糊、背景杂乱、构图异常。
+          </p>
+        </div>
+        <div class="hero-meta">
+          <span class="badge badge-accent">零依赖 baseline</span>
+          <span class="badge">Gemini 可插拔</span>
+          <span class="badge">结构化 JSON</span>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="panel upload-panel">
+          <div class="panel-heading">
+            <h2>上传检测</h2>
+            <p>`heuristic` 只走本地服务；`gemini / hybrid` 会调用 Gemini API。</p>
+          </div>
+
+          <div class="mode-stack">
+            <label class="mode-field" for="analyzer-select">
+              <span>分析模式</span>
+              <select id="analyzer-select">
+                <option value="heuristic">heuristic</option>
+                <option value="gemini">gemini</option>
+                <option value="hybrid">hybrid</option>
+              </select>
+            </label>
+            <p id="mode-copy" class="mode-copy">仅跑本地启发式 baseline，无需 Gemini key。</p>
+            <p id="capability-copy" class="mode-capability">读取服务端能力中...</p>
+          </div>
+
+          <label class="dropzone" id="dropzone" for="image-input">
+            <input id="image-input" type="file" accept="image/*" />
+            <span class="dropzone-kicker">拖拽图片到这里，或点击选择文件</span>
+            <span class="dropzone-copy">支持 JPG / PNG / WEBP 等浏览器可解码格式，仅单张。</span>
+          </label>
+
+          <div class="status-row">
+            <div id="status-pill" class="status-pill">等待上传</div>
+            <button id="reanalyze-button" class="ghost-button" type="button" disabled>重新分析当前图片</button>
+          </div>
+
+          <div class="issue-list">
+            <span class="badge badge-problem">过曝</span>
+            <span class="badge badge-problem">偏暗</span>
+            <span class="badge badge-problem">虚图 / 模糊</span>
+            <span class="badge badge-problem">背景杂乱</span>
+            <span class="badge badge-problem">构图异常</span>
+          </div>
+        </section>
+
+        <section class="panel preview-panel">
+          <div class="panel-heading">
+            <h2>图片预览</h2>
+            <p id="image-meta">尚未选择图片</p>
+          </div>
+          <div class="preview-frame">
+            <img id="preview-image" alt="上传预览" hidden />
+            <div id="preview-placeholder" class="preview-placeholder">等待图片</div>
+          </div>
+        </section>
+
+        <section class="panel result-panel">
+          <div class="panel-heading">
+            <h2>审核结果</h2>
+            <p>结构包含 `scene / view_angle / focus_part / decision / review_recommendation / runtime / issues / out_of_scope_note`，其中 `decision` 支持 `out_of_scope`。</p>
+          </div>
+          <div id="summary-card" class="summary-card empty">
+            上传图片后显示结果
+          </div>
+          <div id="tag-strip" class="tag-strip"></div>
+          <div id="reason-list" class="reason-list"></div>
+        </section>
+
+        <section class="panel metrics-panel">
+          <div class="panel-heading">
+            <h2>关键指标</h2>
+            <p>用于解释当前启发式判定，不代表最终生产指标体系。</p>
+          </div>
+          <div id="metrics-grid" class="metrics-grid"></div>
+          <div id="detail-grid" class="detail-grid"></div>
+        </section>
+
+        <section class="panel json-panel">
+          <div class="panel-heading">
+            <h2>JSON 结果</h2>
+            <p>可直接复制给后端或标注流程做联调。</p>
+          </div>
+          <pre id="json-output" class="json-output">{
+  "status": "idle"
+}</pre>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>
